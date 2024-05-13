@@ -1,0 +1,29 @@
+{
+  "name": "cypress-web-automation",
+  "version": "1.0.0",
+  "main": "test.js",
+  "scripts": {
+    "cy:open": "cypress open",
+    "cy:run:electron:single:test": "npx cypress run --spec 'cypress/e2e/1-getting-started/todo.cy.js'",
+    "cy:run:chrome:single:test": "npx cypress run --headless --browser chrome --spec 'cypress/e2e/1-getting-started/todo.cy.js'",
+    "cy:run:firefox:single:test": "npx cypress run --headless --browser firefox --spec 'cypress/e2e/1-getting-started/todo.cy.js'"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "standard": {
+    "env": [
+      "mocha"
+    ],
+    "globals": [
+      "cy",
+      "Cypress"
+    ]
+  },
+  "devDependencies": {
+    "cypress": "^13.9.0",
+    "mocha": "^10.4.0",
+    "standard": "^17.1.0"
+  }
+}

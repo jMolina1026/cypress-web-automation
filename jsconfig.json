@@ -1,0 +1,3 @@
+{
+  "include": ["./node_modules/cypress", "cypress/e2e/more-examples/*.js", "cypress/e2e/**/*.cy.js"]
+}
