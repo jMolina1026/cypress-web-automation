@@ -4,6 +4,8 @@
  */
 
 import TestDelays from '../helpers/testDelays.js'
+import * as infoObjects from '../helpers/infoObjects.js'
+const { productsObject } = infoObjects
 
 /**
  * ============================================================
@@ -20,6 +22,22 @@ const loginValidations = {
   requiredUsername: 'Epic sadface: Username is required',
   requriedPassword: 'Epic sadface: Password is required'
 }
+
+const items = [
+  productsObject.productBackPack,
+  productsObject.productBikeLight,
+  productsObject.productBoltShirt,
+  productsObject.productFleece,
+  productsObject.productOnsie,
+  productsObject.productRedShirt
+]
+
+const itemDetails = [
+  'productName',
+  'productDesc',
+  'productPrice',
+  'productAddToCart'
+]
 
 /**
 * ============================================================
@@ -75,12 +93,24 @@ function clickTheElementButtonByIndex (element, index) {
     .click()
 }
 
+/**
+ * @description The length of any given array
+ * @param {Array} array - expected array
+ * @returns - length of given array
+ */
+function arrayLength (array = []) {
+  return array.length
+}
+
 // To make any method or variable private, just remove it from the list of exported items
 export {
   baseUrl,
+  items,
+  itemDetails,
   navigateToApp,
   randomNumber,
   clickTheElementButton,
   clickTheElementButtonByIndex,
+  arrayLength,
   loginValidations
 }
