@@ -1,5 +1,5 @@
 import * as utility from '../helpers/utilities.js'
-const { items, itemDetails, arrayLength } = utility
+const { items, itemDetails, arrayLength, clickTheElementButtonByIndex, cyArrayLength } = utility
 
 export default class ProductsPage {
   constructor () {
@@ -37,5 +37,37 @@ export default class ProductsPage {
    */
   itemsDetailsLength () {
     return arrayLength(itemDetails)
+  }
+
+  /**
+   * @description Clicks the add to cart button
+   * @param {Number} index - chooses which button to click
+   */
+  clickTheAddToCartButton (index) {
+    clickTheElementButtonByIndex(this.productAddToCartButtons, index)
+  }
+
+  /**
+   * @description Clicks the remove from cart button
+   * @param {Number} index - chooses which button to click
+   */
+  clickTheRemoveFromCartButton (index) {
+    clickTheElementButtonByIndex(this.productRemoveButtons, index)
+  }
+
+  /**
+   * @description The length of a list of Add to cart elements
+   * @returns - count of how many Add to cart elements are found
+   */
+  getRemoveButtonsLength () {
+    return cyArrayLength(this.productRemoveButtons)
+  }
+
+  /**
+   * @description The length of a list of Remove from cart elements
+   * @returns - count of how many Remove from cart elements are found
+   */
+  getAddToCartBtnsLength () {
+    return cyArrayLength(this.productAddToCartButtons)
   }
 }

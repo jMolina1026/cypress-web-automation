@@ -68,7 +68,7 @@ function randomNumber (min, max) {
  * @desc This will interact with an element by clicking
  * the associated feature and revealing more elements.
  * Repeats in various other components.
- * @param {String} element - the element on the page in focus
+ * @param {String} element - locator used to identify the element
  */
 function clickTheElementButton (element) {
   cy.get(element)
@@ -81,7 +81,7 @@ function clickTheElementButton (element) {
  * @desc This will interact with an element by clicking
  * the associated feature and revealing more elements.
  * Repeats in various other components.
- * @param {String} element - the element on the page in focus
+ * @param {String} element - locator used to identify the element
  */
 function clickTheElementButtonByIndex (element, index) {
   cy.get(element)
@@ -102,6 +102,25 @@ function arrayLength (array = []) {
   return array.length
 }
 
+/**
+ * @description The length of a list of elements
+ * @param {String} element - locator used to identify the element
+ * @returns - count of how many elements are found
+ */
+function cyArrayLength (element) {
+  return cy.get(element)
+    .its('length')
+    .then((elementCount) => {
+      return elementCount
+    })
+}
+
+function test () {
+  return cy.get('body').then($body => {
+    return $body.find(productsPage.productRemoveButtons).length
+  })
+}
+
 // To make any method or variable private, just remove it from the list of exported items
 export {
   baseUrl,
@@ -112,5 +131,6 @@ export {
   clickTheElementButton,
   clickTheElementButtonByIndex,
   arrayLength,
+  cyArrayLength,
   loginValidations
 }
