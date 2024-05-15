@@ -70,4 +70,68 @@ export default class ProductsPage {
   getAddToCartBtnsLength () {
     return cyArrayLength(this.productAddToCartButtons)
   }
+
+  /**
+   * @description The length of a list of Sort elements
+   * @returns - count of how many Sort elements are found
+   */
+  getSortOptionsLength () {
+    return cyArrayLength(this.sortOptions)
+  }
+
+  /**
+   * @description The length of a list of Product Name elements
+   * @returns - count of how many Sort elements are found
+   */
+  getProductNamesLength () {
+    return cyArrayLength(this.productNames)
+  }
+
+  /**
+   * @description Array sorted from a specific object
+   * @returns - alphabetical array
+   */
+  sortNewItemsDetailsArrayAscending(length) {
+    let array = []
+    for (let j = 0; j < length; j++) {
+      array[j] = this.itemsDetails(j, 1)
+    }
+    return array.sort()
+  }
+
+  /**
+   * @description Array sorted from a specific object
+   * @returns - alphabetical array in reverse order
+   */
+  sortNewItemsDetailsArrayDescending(length) {
+    let array = []
+    for (let j = 0; j < length; j++) {
+      array[j] = this.itemsDetails(j, 1)
+    }
+    return array.sort().reverse()
+  }
+
+  getItemsDetailsArray() {
+    let array = []
+    for (let j = 0; j < length; j++) {
+      array[j] = this.itemsDetails(j, 1)
+    }
+    return array
+  }
+
+  /**
+   * @description Function to change order of array (Strings only)
+   * @param {Number} index - chooses which sort function to use
+   * @param {Number} length - size of list of elements
+   * @returns - alpahabetical array in non-reverse or reverse order
+   */
+  sortStringArrayList(index, length) {
+    let arrayList;
+    switch (index) {
+      case 0: arrayList = this.sortNewItemsDetailsArrayAscending(length); break;
+      case 1: arrayList = this.sortNewItemsDetailsArrayDescending(length); break;
+      default: throw new Error("Unexpected value: " + index)
+    }
+    return arrayList
+  }
 }

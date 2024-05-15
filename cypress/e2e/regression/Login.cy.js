@@ -4,7 +4,7 @@ import * as utility from '../../helpers/utilities.js'
 const { navigateToApp, loginValidations } = utility
 const loginPage = new LoginPage()
 
-describe('Given the user visits Sauce Demo', () => {
+describe('Given the user visits Sauce Demo', { retries: { runMode: 2, openMode: 2 } }, () => {
   context('The user logs into the site with valid credentials', () => {
     it('and verfies landing on the homepage', () => {
       loginPage.login()

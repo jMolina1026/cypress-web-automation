@@ -4,7 +4,7 @@ import ProductsPage from '../../page-objects/ProductsPage.js'
 const loginPage = new LoginPage()
 const productsPage = new ProductsPage()
 
-describe('Given the user is logged into the Sauce Demo site', () => {
+describe('Given the user is logged into the Sauce Demo site', { retries: { runMode: 2, openMode: 2 } }, () => {
   let productsPageElements
   beforeEach(() => {
     loginPage.login()

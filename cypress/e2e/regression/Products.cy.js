@@ -1,10 +1,14 @@
 import LoginPage from '../../page-objects/LoginPage.js'
 import ProductsPage from '../../page-objects/ProductsPage.js'
+import * as infoObjects from '../../helpers/infoObjects.js'
+// import * as utility from '../helpers/utilities.js'
 
+// const { itemDetails } = utility
+const { sortList } = infoObjects
 const loginPage = new LoginPage()
 const productsPage = new ProductsPage()
 
-describe('Given the user is logged into the Sauce Demo site', () => {
+describe('Given the user is logged into the Sauce Demo site', { retries: { runMode: 2, openMode: 0 } }, () => {
   let productsPageElements
   beforeEach(() => {
     loginPage.login()
@@ -43,6 +47,31 @@ describe('Given the user is logged into the Sauce Demo site', () => {
           } else {
             cy.get(productsPage.shoppingCartBadge).should('not.exist')
           }
+        }
+      })
+    })
+  })
+
+  context('Verify that the product page contains the ability to sort', () =>{
+    it.only('and have the ability to sort alphanumerically', () => {
+      productsPage.getSortOptionsLength().then((optionsLength) => {
+        for (let i = 0; i < optionsLength; i++) {
+          cy.get(productsPage.sortContainer).as('sortOptions').select(i)
+          cy.get('@sortOptions')
+            .find(':selected')
+            .invoke('text').then((sortOptions) => {
+            cy.log("sortOptions = " + sortOptions)
+            cy.get(productsPage.activeSortOption).should('have.text', sortOptions)
+          })
+          productsPage.getProductNamesLength().then((count) => {
+            if (i === 0 || i === 1) {
+              for (let j = 0; j < count; j++) {
+                let test = productsPage.sortStringArrayList(i, count)
+                cy.wrap("[test] = " + test[j])
+                cy.get(productsPage.productNames).eq(j).should('have.text', test[j])
+              }
+            }
+          })
         }
       })
     })

@@ -42,6 +42,16 @@ const productsObject = {
   }
 }
 
+const sortList = {
+  options: [
+    'Name (A to Z)',
+    'Name (Z to A)',
+    'Price (low to high)',
+    'Price (high to low)'
+  ]
+}
+
 export {
-  productsObject
+  productsObject,
+  sortList
 }

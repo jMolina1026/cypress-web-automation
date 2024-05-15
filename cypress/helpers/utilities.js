@@ -115,12 +115,6 @@ function cyArrayLength (element) {
     })
 }
 
-function test () {
-  return cy.get('body').then($body => {
-    return $body.find(productsPage.productRemoveButtons).length
-  })
-}
-
 // To make any method or variable private, just remove it from the list of exported items
 export {
   baseUrl,
