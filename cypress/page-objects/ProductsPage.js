@@ -91,27 +91,43 @@ export default class ProductsPage {
    * @description Array sorted from a specific object
    * @returns - alphabetical array
    */
-  sortNewItemsDetailsArrayAscending(length) {
+  sortNewItemsDetailsArrayAscending(length, objectIndex) {
     let array = []
     for (let j = 0; j < length; j++) {
-      array[j] = this.itemsDetails(j, 1)
+      if (objectIndex === 1) {
+        array[j] = this.itemsDetails(j, objectIndex)
+      } else if (objectIndex === 3) {
+        array[j] = parseFloat(this.itemsDetails(j, objectIndex).replace("$", ""))
+      }
     }
-    return array.sort()
+    if (typeof(array[0]) == 'number') {
+      return array.sort((a, b) => a - b)
+    } else {
+      return array.sort()
+    }
   }
 
   /**
    * @description Array sorted from a specific object
    * @returns - alphabetical array in reverse order
    */
-  sortNewItemsDetailsArrayDescending(length) {
+  sortNewItemsDetailsArrayDescending(length, objectIndex) {
     let array = []
     for (let j = 0; j < length; j++) {
-      array[j] = this.itemsDetails(j, 1)
+      if (objectIndex === 1) {
+        array[j] = this.itemsDetails(j, objectIndex)
+      } else if (objectIndex === 3) {
+        array[j] = parseFloat(this.itemsDetails(j, objectIndex).replace("$", ""))
+      }
     }
-    return array.sort().reverse()
+    if (typeof(array[0]) == 'number') {
+      return array.sort((a, b) => a - b).reverse()
+    } else {
+      return array.sort().reverse()
+    }
   }
 
-  getItemsDetailsArray() {
+  getItemsDetailsArray(length) {
     let array = []
     for (let j = 0; j < length; j++) {
       array[j] = this.itemsDetails(j, 1)
@@ -123,15 +139,68 @@ export default class ProductsPage {
    * @description Function to change order of array (Strings only)
    * @param {Number} index - chooses which sort function to use
    * @param {Number} length - size of list of elements
-   * @returns - alpahabetical array in non-reverse or reverse order
+   * @returns - alpahabetical array in order or reverse order
    */
   sortStringArrayList(index, length) {
     let arrayList;
     switch (index) {
-      case 0: arrayList = this.sortNewItemsDetailsArrayAscending(length); break;
-      case 1: arrayList = this.sortNewItemsDetailsArrayDescending(length); break;
+      case 0: arrayList = this.sortNewItemsDetailsArrayAscending(length, 1); break;
+      case 1: arrayList = this.sortNewItemsDetailsArrayDescending(length, 1); break;
+      case 2: arrayList = this.sortNewItemsDetailsArrayAscending(length, 3); break;
+      case 3: arrayList = this.sortNewItemsDetailsArrayDescending(length, 3); break;
       default: throw new Error("Unexpected value: " + index)
     }
     return arrayList
+  }
+
+  sortAscend(array = []) {
+    if  (typeof(array[0]) == 'number') {
+      return array.sort((a, b) => a - b)
+    } else {
+      return array.sort()
+    }
+  }
+
+  sortDescend(array = []) {
+    if  (typeof(array[0]) == 'number') {
+      return array.sort((a, b) => a - b).reverse()
+    } else {
+      return array.sort().reverse()
+    }
+  }
+
+  convertStringToFloat(array = []) {
+    let arrayFloat = []
+    array.forEach((item) => arrayFloat.push(parseFloat(item.replace("$", ""))))
+    return arrayFloat
+  }
+
+  sortArray(index, array) {
+    let arrayList;
+    switch (index) {
+      case 0: arrayList = this.sortAscend(array); break;
+      case 1: arrayList = this.sortDescend(array); break;
+      case 2: arrayList = this.sortAscend(this.convertStringToFloat(array)); break;
+      case 3: arrayList = this.sortDescend(this.convertStringToFloat(array)); break;
+      default: throw new Error("Unexpected value: " + index)
+    }
+    return arrayList
+  }
+
+  preSortList(index1, count) {
+    for (let j = 0; j < count; j++) {
+      let preSort = []
+      if (index1 === 0 || index1 === 1) {
+        cy.get(this.productNames).eq(j).invoke('text').then((productText) => {
+          preSort[j] = productText
+          cy.log("preSortNames = " + preSort[j] + " " + "typeof = " + typeof preSort[j])
+        })
+      } else if (index1 === 2 || index1 === 3) {
+        cy.get(this.productPrices).eq(j).invoke('text').then((productText) => {
+          preSort[j] = parseFloat(productText.replace("$", ""))
+          cy.log("preSortNames = " + preSort[j] + " " + "typeof = " + typeof preSort[j])
+        })
+      } 
+    }
   }
 }

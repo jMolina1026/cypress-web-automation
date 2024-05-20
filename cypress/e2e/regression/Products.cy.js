@@ -53,7 +53,7 @@ describe('Given the user is logged into the Sauce Demo site', { retries: { runMo
   })
 
   context('Verify that the product page contains the ability to sort', () =>{
-    it.only('and have the ability to sort alphanumerically', () => {
+    it('and have the ability to sort alphanumerically', () => {
       productsPage.getSortOptionsLength().then((optionsLength) => {
         for (let i = 0; i < optionsLength; i++) {
           cy.get(productsPage.sortContainer).as('sortOptions').select(i)
@@ -66,13 +66,49 @@ describe('Given the user is logged into the Sauce Demo site', { retries: { runMo
           productsPage.getProductNamesLength().then((count) => {
             if (i === 0 || i === 1) {
               for (let j = 0; j < count; j++) {
-                let test = productsPage.sortStringArrayList(i, count)
-                cy.wrap("[test] = " + test[j])
-                cy.get(productsPage.productNames).eq(j).should('have.text', test[j])
+                let sortedArray = productsPage.sortStringArrayList(i, count)
+                cy.wrap("[test] = " + sortedArray[j])
+                cy.get(productsPage.productNames).eq(j).should('have.text', sortedArray[j])
+              }
+            } else if (i === 2 || i === 3) {
+              for (let j = 0; j < count; j++) {
+                let sortedArray = productsPage.sortStringArrayList(i, count)
+                cy.wrap("[test] = " + sortedArray[j])
+                cy.get(productsPage.productPrices).eq(j).should('have.text', "$" + sortedArray[j])
               }
             }
           })
         }
+      })
+    })
+  })
+
+  context('Verify that the product page contains the ability to sort - V2', () =>{
+    it.only('and have the ability to sort alphanumerically', () => {
+      productsPage.getSortOptionsLength().then((optionsLength) => {
+          for (let i = 0; i < optionsLength; i++) {
+            let element = ""
+            if (i === 0 || i === 1) {
+              element = productsPage.productNames
+            } else if (i === 2 || i === 3) {
+              element = productsPage.productPrices
+            } 
+            const namelist = []
+              cy.get(element).each((products) => namelist.push(products.text())).then(() => {
+              cy.get(productsPage.sortContainer).as('sortOptions').select(i)
+              cy.get('@sortOptions')
+                .find(':selected')
+                .invoke('text').then((sortOptions) => {
+                cy.log("sortOptions = " + sortOptions)
+                cy.get(productsPage.activeSortOption).should('have.text', sortOptions)
+              })
+              if (i === 0 || i === 1) {
+                cy.get(element).should('have.text', productsPage.sortArray(i, namelist).join(''))
+              } else if (i === 2 || i === 3) {
+                cy.get(element).should('have.text', "$" + productsPage.sortArray(i, namelist).join('$'))
+              } 
+            }) 
+          } 
       })
     })
   })
