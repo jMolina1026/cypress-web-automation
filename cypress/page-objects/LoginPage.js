@@ -6,8 +6,8 @@ export default class LoginPage {
     this.username = Cypress.env('USERNAME')
     this.password = Cypress.env('PASSWORD')
     /**
-       * CSS selectors
-       */
+     * CSS selectors
+     */
     this.usernameField = 'input#user-name'
     this.passwordField = 'input#password'
     this.loginBtn = 'input#login-button'
@@ -19,9 +19,9 @@ export default class LoginPage {
   }
 
   /**
-     * Enters an email into the email field
-     * @param {String} username - enter a username
-     */
+   * Enters an email into the email field
+   * @param {String} username - enter a username
+   */
   enterUsername (username = this.username) {
     cy.get(this.usernameField)
       .should('exist')
@@ -30,9 +30,9 @@ export default class LoginPage {
   }
 
   /**
-     * Enteres a password into the passwored field
-     * @param {String} password - enter a password
-     */
+   * Enteres a password into the passwored field
+   * @param {String} password - enter a password
+   */
   enterPassword (password = this.password) {
     cy.get(this.passwordField)
       .should('exist')
@@ -41,28 +41,28 @@ export default class LoginPage {
   }
 
   /**
-     * @description Enter the credentials into the login fields
-     * @param {String} username - username credential
-     * @param {String} password - password credential
-     */
+   * @description Enter the credentials into the login fields
+   * @param {String} username - username credential
+   * @param {String} password - password credential
+   */
   enterCredentials (username = this.username, password = this.password) {
     this.enterUsername(username)
     this.enterPassword(password)
   }
 
   /**
-     * @description Clicks the login button
-     */
+   * @description Clicks the login button
+   */
   clickTheLoginButton () {
     clickTheElementButton(this.loginBtn)
   }
 
   /**
-     * @description Login to the website under test
-     * @param {String} url - url string
-     * @param {String} username - username credential
-     * @param {String} password - password credential
-     */
+   * @description Login to the website under test
+   * @param {String} url - url string
+   * @param {String} username - username credential
+   * @param {String} password - password credential
+   */
   login (url = baseUrl, username = this.username, password = this.password) {
     navigateToApp(url)
     this.enterCredentials(username, password)

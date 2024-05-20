@@ -4,6 +4,8 @@
  */
 
 import TestDelays from '../helpers/testDelays.js'
+import * as infoObjects from '../helpers/infoObjects.js'
+const { productsObject } = infoObjects
 
 /**
  * ============================================================
@@ -20,6 +22,22 @@ const loginValidations = {
   requiredUsername: 'Epic sadface: Username is required',
   requriedPassword: 'Epic sadface: Password is required'
 }
+
+const items = [
+  productsObject.productBackPack,
+  productsObject.productBikeLight,
+  productsObject.productBoltShirt,
+  productsObject.productFleece,
+  productsObject.productOnsie,
+  productsObject.productRedShirt
+]
+
+const itemDetails = [
+  'productName',
+  'productDesc',
+  'productPrice',
+  'productAddToCart'
+]
 
 /**
 * ============================================================
@@ -50,7 +68,7 @@ function randomNumber (min, max) {
  * @desc This will interact with an element by clicking
  * the associated feature and revealing more elements.
  * Repeats in various other components.
- * @param {String} element - the element on the page in focus
+ * @param {String} element - locator used to identify the element
  */
 function clickTheElementButton (element) {
   cy.get(element)
@@ -63,7 +81,7 @@ function clickTheElementButton (element) {
  * @desc This will interact with an element by clicking
  * the associated feature and revealing more elements.
  * Repeats in various other components.
- * @param {String} element - the element on the page in focus
+ * @param {String} element - locator used to identify the element
  */
 function clickTheElementButtonByIndex (element, index) {
   cy.get(element)
@@ -75,12 +93,38 @@ function clickTheElementButtonByIndex (element, index) {
     .click()
 }
 
+/**
+ * @description The length of any given array
+ * @param {Array} array - expected array
+ * @returns - length of given array
+ */
+function arrayLength (array = []) {
+  return array.length
+}
+
+/**
+ * @description The length of a list of elements
+ * @param {String} element - locator used to identify the element
+ * @returns - count of how many elements are found
+ */
+function cyArrayLength (element) {
+  return cy.get(element)
+    .its('length')
+    .then((elementCount) => {
+      return elementCount
+    })
+}
+
 // To make any method or variable private, just remove it from the list of exported items
 export {
   baseUrl,
+  items,
+  itemDetails,
   navigateToApp,
   randomNumber,
   clickTheElementButton,
   clickTheElementButtonByIndex,
+  arrayLength,
+  cyArrayLength,
   loginValidations
 }
