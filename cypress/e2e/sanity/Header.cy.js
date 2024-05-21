@@ -10,15 +10,15 @@ describe('Given the user is logged into the Sauce Demo site', { retries: { runMo
       loginPage.login()
     })
 
-    ;[headerPage.headerLogo, 
-      headerPage.burgerMenuButton, 
-      headerPage.shoppingCartButton, 
-      headerPage.headerSecondTitle, 
+    ;[headerPage.headerLogo,
+      headerPage.burgerMenuButton,
+      headerPage.shoppingCartButton,
+      headerPage.headerSecondTitle,
       headerPage.headerSecondaryFilter].forEach((element) => {
-        it('and add the element visible is -> ' + element, () => {
-          cy.get(element).should('exist').and('be.visible')
-        })
+      it('and add the element visible is -> ' + element, () => {
+        cy.get(element).should('exist').and('be.visible')
       })
+    })
   })
 
   context('Verify that all available items exists', () => {
@@ -26,17 +26,18 @@ describe('Given the user is logged into the Sauce Demo site', { retries: { runMo
       loginPage.login()
     })
     it('and the icon is visible', () => {
-      [headerPage.headerLogo, 
-        headerPage.burgerMenuButton, 
-        headerPage.shoppingCartButton, 
-        headerPage.headerSecondTitle, 
+      [headerPage.headerLogo,
+        headerPage.burgerMenuButton,
+        headerPage.shoppingCartButton,
+        headerPage.headerSecondTitle,
         headerPage.headerSecondaryFilter].forEach((element) => {
-          if (element === headerPage.headerLogo) {
-            cy.get(element).should('exist').and('be.visible').and('have.text', 'Swag Labs')
-          } else {
-            cy.get(element).should('exist').and('be.visible')
-          }
-        })
+        if (element === headerPage.headerLogo) {
+          cy.get(element).should('exist').and('be.visible')
+            .and('have.text', 'Swag Labs')
+        } else {
+          cy.get(element).should('exist').and('be.visible')
+        }
+      })
     })
   })
 })

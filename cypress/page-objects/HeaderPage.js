@@ -1,6 +1,4 @@
-import * as utility from '../helpers/utilities.js'
 import * as commonSelectors from '../helpers/CommonSelectors.js'
-const { items } = utility
 const { commonHeaderElements } = commonSelectors
 
 export default class HeaderPage {
@@ -14,7 +12,4 @@ export default class HeaderPage {
     this.headerSecondTitle = commonHeaderElements.secondaryTitle
     this.headerSecondaryFilter = commonHeaderElements.sortContainer
   }
-
-
-
 }
