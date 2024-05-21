@@ -5,7 +5,7 @@ const loginPage = new LoginPage()
 const headerPage = new HeaderPage()
 
 describe('Given the user is logged into the Sauce Demo site', { retries: { runMode: 2, openMode: 0 } }, () => {
-  context('Verify that all available items are visible', { testIsolation: false }, () => {
+  context('Verify that all available items exist in the header', { testIsolation: false }, () => {
     before(() => {
       loginPage.login()
     })
@@ -15,7 +15,7 @@ describe('Given the user is logged into the Sauce Demo site', { retries: { runMo
       headerPage.shoppingCartButton, 
       headerPage.headerSecondTitle, 
       headerPage.headerSecondaryFilter].forEach((element) => {
-        it('and add the icon visible is -> ' + element, () => {
+        it('and add the element visible is -> ' + element, () => {
           cy.get(element).should('exist').and('be.visible')
         })
       })
@@ -25,14 +25,17 @@ describe('Given the user is logged into the Sauce Demo site', { retries: { runMo
     beforeEach(() => {
       loginPage.login()
     })
-
     it('and the icon is visible', () => {
       [headerPage.headerLogo, 
         headerPage.burgerMenuButton, 
         headerPage.shoppingCartButton, 
         headerPage.headerSecondTitle, 
         headerPage.headerSecondaryFilter].forEach((element) => {
+          if (element === headerPage.headerLogo) {
+            cy.get(element).should('exist').and('be.visible').and('have.text', 'Swag Labs')
+          } else {
             cy.get(element).should('exist').and('be.visible')
+          }
         })
     })
   })
