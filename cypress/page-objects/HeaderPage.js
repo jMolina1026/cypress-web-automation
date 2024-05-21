@@ -6,7 +6,7 @@ export default class HeaderPage {
     /**
      * CSS selectors
      */
-    this.burgerMenuButton = 'div.bm-burger-button'
+    this.burgerMenuButton = commonHeaderElements.burgerMenuButton
     this.shoppingCartButton = commonHeaderElements.shoppingCartButton
     this.headerLogo = 'div.app_logo'
     this.headerSecondTitle = commonHeaderElements.secondaryTitle

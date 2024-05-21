@@ -2,7 +2,7 @@ import * as utility from '../helpers/utilities.js'
 import * as commonSelectors from '../helpers/CommonSelectors.js'
 
 const { items, itemDetails, arrayLength, clickTheElementButtonByIndex, cyArrayLength } = utility
-const { commonHeaderElements } = commonSelectors
+const { commonHeaderElements, commonProductsElements } = commonSelectors
 
 export default class ProductsPage {
   constructor () {
@@ -13,9 +13,9 @@ export default class ProductsPage {
     this.productNames = 'div.inventory_item_name'
     this.productDescriptions = 'div.inventory_item_desc'
     this.productPrices = 'div.inventory_item_price'
-    this.productAddToCartButtons = 'button.btn_primary'
+    this.productAddToCartButtons = commonProductsElements.productAddToCartButtons
     this.productImages = 'div.inventory_item_img'
-    this.shoppingCartBadge = 'span.shopping_cart_badge'
+    this.shoppingCartBadge = commonProductsElements.shoppingCartBadge
     this.productRemoveButtons = 'button.btn_secondary'
     this.activeSortOption = 'span.active_option'
     this.sortContainer = commonHeaderElements.sortContainer

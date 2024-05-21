@@ -1,4 +1,6 @@
 import * as utility from '../helpers/utilities.js'
+import * as commonSelectors from '../helpers/CommonSelectors.js'
+const { commonHeaderElements, commonLoginPageElements } = commonSelectors
 const { baseUrl, navigateToApp, clickTheElementButton } = utility
 
 export default class LoginPage {
@@ -13,7 +15,7 @@ export default class LoginPage {
     this.loginBtn = 'input#login-button'
     this.headerLogo = 'div.app_logo'
     this.errorMessageBox = 'h3[data-test="error"]'
-    this.loginLogo = 'div.login_logo'
+    this.loginLogo = commonLoginPageElements.loginLogo
     this.loginCredential = 'div#login_credentials'
     this.loginPassword = 'div.login_password'
   }
