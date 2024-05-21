@@ -1,5 +1,8 @@
 import * as utility from '../helpers/utilities.js'
+import * as commonSelectors from '../helpers/CommonSelectors.js'
+
 const { items, itemDetails, arrayLength, clickTheElementButtonByIndex, cyArrayLength } = utility
+const { commonHeaderElements } = commonSelectors
 
 export default class ProductsPage {
   constructor () {
@@ -15,9 +18,9 @@ export default class ProductsPage {
     this.shoppingCartBadge = 'span.shopping_cart_badge'
     this.productRemoveButtons = 'button.btn_secondary'
     this.activeSortOption = 'span.active_option'
-    this.sortContainer = 'select.product_sort_container'
-    this.sortOptions = 'select.product_sort_container > option'
-    this.productPageTitle = 'span.title'
+    this.sortContainer = commonHeaderElements.sortContainer
+    this.sortOptions = commonHeaderElements.sortContainer + ' > option'
+    this.productPageTitle = commonHeaderElements.secondaryTitle
   }
 
   /**

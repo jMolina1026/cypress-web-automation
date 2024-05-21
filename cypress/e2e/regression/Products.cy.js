@@ -1,10 +1,6 @@
 import LoginPage from '../../page-objects/LoginPage.js'
 import ProductsPage from '../../page-objects/ProductsPage.js'
-import * as infoObjects from '../../helpers/infoObjects.js'
-// import * as utility from '../helpers/utilities.js'
 
-// const { itemDetails } = utility
-const { sortList } = infoObjects
 const loginPage = new LoginPage()
 const productsPage = new ProductsPage()
 
@@ -21,7 +17,7 @@ describe('Given the user is logged into the Sauce Demo site', { retries: { runMo
     ]
   })
 
-  context('Verify that a can take actions on the items', () => {
+  context('Verify that a user can take actions on the items', () => {
     it('and add items to the cart', () => {
       productsPage.getAddToCartBtnsLength().then((addToCartLength) => {
         for (let i = 0; i < addToCartLength; i++) {
@@ -84,7 +80,7 @@ describe('Given the user is logged into the Sauce Demo site', { retries: { runMo
   })
 
   context('Verify that the product page contains the ability to sort - V2', () =>{
-    it.only('and have the ability to sort alphanumerically', () => {
+    it('and have the ability to sort alphanumerically', () => {
       productsPage.getSortOptionsLength().then((optionsLength) => {
           for (let i = 0; i < optionsLength; i++) {
             let element = ""
