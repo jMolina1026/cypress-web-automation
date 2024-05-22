@@ -15,9 +15,13 @@ export default class HamburgerMenu {
     this.burgerMenuAbout = 'a#about_sidebar_link'
     this.burgerMenuLogout = 'a#logout_sidebar_link'
     this.burgerMenuResetApp = 'a#reset_sidebar_link'
+    this.burgerMenuItemsList = 'nav.bm-item-list > a'
     this.loginLogo = commonLoginPageElements.loginLogo
     this.shoppingCartBadge = commonProductsElements.shoppingCartBadge
     this.productAddToCartButtons = commonProductsElements.productAddToCartButtons
+    this.sauceLabsBackpackImg = 'img[alt=\'Sauce Labs Backpack\']'
+    this.sauceLabsBikeLightImg = 'img[alt=\'Sauce Labs Bike Light\']'
+    this.sauceLabsLogo = 'img[src=\'/images/logo.svg\']'
   }
 
   /**
@@ -27,10 +31,10 @@ export default class HamburgerMenu {
    * @returns - element text
    */
   getMenuOptionsText (element = this.burgerMenuItemsList, index = 0) {
-    getElementText(element, index)
+    return getElementText(element, index)
   }
 
-  clickTheMenuButton (element) {
+  clickMenuPageButton (element) {
     clickTheElementButton(element)
   }
 }

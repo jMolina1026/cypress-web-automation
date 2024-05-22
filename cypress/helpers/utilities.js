@@ -58,7 +58,6 @@ const burgerMenuText = [
  * @param {String} url - url string
  */
 function navigateToApp (url = baseUrl) {
-  Cypress.config('pageLoadTimeout', 10000)
   cy.visit(url)
 }
 

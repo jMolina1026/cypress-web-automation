@@ -1,17 +1,15 @@
 import LoginPage from '../../page-objects/LoginPage.js'
-import HeaderPage from '../../page-objects/HeaderPage.js'
 import HambugerMenuPage from '../../page-objects/HamburgerMenuPage.js'
 import * as utility from '../../helpers/utilities.js'
 
 const { burgerMenuText } = utility
 const loginPage = new LoginPage()
-const headerPage = new HeaderPage()
 const hamburgerMenuPage = new HambugerMenuPage()
 
 describe('Given the user is logged into the Sauce Demo site', { retries: { runMode: 2, openMode: 0 } }, () => {
   before(() => {
     loginPage.login()
-    hamburgerMenuPage.clickTheMenuButton(hamburgerMenuPage.burgerMenuButton)
+    hamburgerMenuPage.clickMenuPageButton(hamburgerMenuPage.burgerMenuButton)
   })
 
   context('Verify that the Hamburger menu works as intended ', { testIsolation: false }, () => {
