@@ -39,6 +39,14 @@ const itemDetails = [
   'productAddToCart'
 ]
 
+const burgerMenuText = [
+  'Close Menu',
+  'All Items',
+  'About',
+  'Logout',
+  'Reset App State'
+]
+
 /**
 * ============================================================
 *  FUNCTIONS
@@ -50,7 +58,6 @@ const itemDetails = [
  * @param {String} url - url string
  */
 function navigateToApp (url = baseUrl) {
-  Cypress.config('pageLoadTimeout', 10000)
   cy.visit(url)
 }
 
@@ -115,16 +122,34 @@ function cyArrayLength (element) {
     })
 }
 
+/**
+ * @description Grabs an elements text
+ * @param {String} element - locator used to identify the element
+ * @param {Number} index - position of element in list
+ * @returns - element text
+ */
+function getElementText(element, index = 0) {
+  return cy.get(element).should('exist')
+    .and('be.visible')
+    .eq(index)
+    .invoke('text')
+    .then((elementText) => {
+      return elementText
+    })
+}
+
 // To make any method or variable private, just remove it from the list of exported items
 export {
   baseUrl,
   items,
   itemDetails,
+  burgerMenuText,
   navigateToApp,
   randomNumber,
   clickTheElementButton,
   clickTheElementButtonByIndex,
   arrayLength,
   cyArrayLength,
+  getElementText,
   loginValidations
 }
