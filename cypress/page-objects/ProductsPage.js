@@ -155,7 +155,11 @@ export default class ProductsPage {
     }
     return arrayList
   }
-
+  /**
+   * @description Function to sort array in alphabetical order
+   * @param {Array} array - array of strings 
+   * @returns - array in alphabetical order
+   */
   sortAscend(array = []) {
     if  (typeof(array[0]) == 'number') {
       return array.sort((a, b) => a - b)
@@ -164,6 +168,11 @@ export default class ProductsPage {
     }
   }
 
+  /**
+   * @description Function to sort array in reverse alphabetical order
+   * @param {Array} array - array of strings 
+   * @returns - array in reverse alphabetical order
+   */
   sortDescend(array = []) {
     if  (typeof(array[0]) == 'number') {
       return array.sort((a, b) => a - b).reverse()
@@ -172,12 +181,23 @@ export default class ProductsPage {
     }
   }
 
+  /**
+   * @description Converts a string to a float if decimal numbers are available in the string
+   * @param {Array} array - array of strings 
+   * @returns - Array of Floats
+   */
   convertStringToFloat(array = []) {
     let arrayFloat = []
     array.forEach((item) => arrayFloat.push(parseFloat(item.replace("$", ""))))
     return arrayFloat
   }
 
+  /**
+   * @description Sorts the array in either Ascending or Descending order
+   * @param {Number} index - determines which sort function to use depending on position
+   * @param {Array} array - array to be sorted 
+   * @returns - Ascending or Descending array list
+   */
   sortArray(index, array) {
     let arrayList;
     switch (index) {
@@ -190,6 +210,11 @@ export default class ProductsPage {
     return arrayList
   }
 
+  /**
+   * @description Creates a list of all available product names
+   * @param {Number} index1 - position of which sort options is being used
+   * @param {Number} count - the position of which product to obtain the name from
+   */
   preSortList(index1, count) {
     for (let j = 0; j < count; j++) {
       let preSort = []
@@ -205,5 +230,20 @@ export default class ProductsPage {
         })
       } 
     }
+  }
+
+  /**
+   * @description Get the text from specific product elements
+   * @param {String} element - locator used to identify the element 
+   * @param {Number} index - position of item in array
+   * @returns - product information such as Name, Desc or Price
+   */
+  getProductInfoText(element, index) {
+    return cy.get(element)
+      .eq(index)
+      .invoke('text')
+      .then((text) => {
+        return text;
+      })
   }
 }

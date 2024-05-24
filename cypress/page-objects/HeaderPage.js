@@ -1,4 +1,5 @@
 import * as commonSelectors from '../helpers/CommonSelectors.js'
+import { clickTheElementButton } from '../helpers/utilities.js'
 const { commonHeaderElements } = commonSelectors
 
 export default class HeaderPage {
@@ -11,5 +12,12 @@ export default class HeaderPage {
     this.headerLogo = 'div.app_logo'
     this.headerSecondTitle = commonHeaderElements.secondaryTitle
     this.headerSecondaryFilter = commonHeaderElements.sortContainer
+  }
+
+  /**
+   * @description Clicks the shopping cart button
+   */
+  clickTheShoppingCartBtn() {
+    clickTheElementButton(this.shoppingCartButton)
   }
 }
